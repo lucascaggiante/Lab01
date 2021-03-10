@@ -30,26 +30,56 @@ public class FXMLController {
     private TextArea txtResult;
 
     @FXML
+    private Button idCancella;
+
+    @FXML
     private Button btnReset;
+    
+    @FXML
+    private TextArea txtTime;
 
     @FXML
     void doInsert(ActionEvent event) {
     	// TODO
+    	double inizio = System.nanoTime();
     	this.elenco.addParola(txtParola.getText());
+    	double fine = System.nanoTime();
     	this.elenco.getElenco();
     	this.txtParola.setText("");
+    	
     	String risultato = "";
     	for (String s : elenco.getElenco()) {
     		risultato += s + "\n";
     	}
     	this.txtResult.setText(risultato);
+    	this.txtTime.setText("Tempo impiegato per l'operazione: " + (fine-inizio) + "  ns");
     }
 
     @FXML
     void doReset(ActionEvent event) {
     	// TODO
+    	double inizio = System.nanoTime();
     	this.elenco.reset();
+    	double fine = System.nanoTime();
     	txtResult.setText(elenco.toString());
+    	
+    	this.txtTime.setText("Tempo impiegato per l'operazione: " + (fine-inizio) + "  ns");
+    }
+    
+    @FXML
+    void doCancella(ActionEvent event) {
+    	double inizio = System.nanoTime();
+    	this.elenco.cancellaParola(txtResult.getSelectedText());
+    	double fine = System.nanoTime();
+    	this.txtResult.clear();
+    	String risultato = "";
+    	for(String s : elenco.getElenco()) {
+    		risultato += s + "\n";
+    	}
+    	this.txtResult.setText(risultato);
+    	
+    	this.txtTime.setText("Tempo impiegato per l'operazione: " + (fine-inizio) + "  ns");
+
     }
 
     @FXML

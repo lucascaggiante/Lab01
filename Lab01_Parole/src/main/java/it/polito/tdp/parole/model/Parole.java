@@ -59,5 +59,13 @@ public class Parole {
 		listaParole.removeAll(listaParole);
 		// TODO
 	}
+	
+	public void cancellaParola(String p) {
+		
+		if (listaParole.contains(p))
+			listaParole.remove(p);
+		}
+		
+	}
 
-}
+
